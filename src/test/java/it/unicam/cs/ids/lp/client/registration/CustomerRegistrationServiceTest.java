@@ -28,7 +28,6 @@ class CustomerRegistrationServiceTest {
 
         CustomerCard customerCard = new CustomerCard();
         customerCard.setCustomer(customer);
-        customerCard.setProgram(CustomerCard.CardProgram.Points);
 
         CustomerAccount customerAccount = new CustomerAccount();
         customerAccount.setCustomer(customer);

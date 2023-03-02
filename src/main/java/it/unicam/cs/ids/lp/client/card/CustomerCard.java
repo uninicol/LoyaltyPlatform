@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.lp.client.card;
 
+import it.unicam.cs.ids.lp.activity.card.Card;
 import it.unicam.cs.ids.lp.client.Customer;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -21,8 +22,9 @@ public class CustomerCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-    @Enumerated(EnumType.STRING)
-    private CardProgram program;
+    @ManyToOne
+    @JoinColumn
+    private Card card;
     private Integer points = 0;
     private Integer tier = 1;
     private Boolean family = false;
@@ -38,14 +40,6 @@ public class CustomerCard {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    public enum CardProgram {
-        Points,
-        Levels,
-        Membership,
-        Cashback,
-        Coalition,
     }
 }
 
