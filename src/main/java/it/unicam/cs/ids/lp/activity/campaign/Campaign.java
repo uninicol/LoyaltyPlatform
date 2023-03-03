@@ -1,10 +1,8 @@
 package it.unicam.cs.ids.lp.activity.campaign;
 
+import it.unicam.cs.ids.lp.activity.Activity;
 import it.unicam.cs.ids.lp.activity.card.Card;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -21,6 +19,7 @@ import java.util.Objects;
 public class Campaign {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "card_id")
@@ -28,6 +27,8 @@ public class Campaign {
     private String description;
     private String shortDescription;
     private String shopUrl;
+    @Enumerated(EnumType.STRING)
+    private Activity.ContentCategory category;
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,6 @@
 package it.unicam.cs.ids.lp.activity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.lp.activity.card.Card;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -17,10 +19,16 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class Activity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private Long id;
     private String name;
     private String address;
     private String telephoneNumber;
     private String email;
+    @JsonIgnore
+    private String password;
+    private LocalDate registrationDate;
     @Enumerated(EnumType.STRING)
     private ContentCategory category;
     @ManyToOne

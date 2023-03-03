@@ -1,8 +1,6 @@
 package it.unicam.cs.ids.lp.activity.registration;
 
 import it.unicam.cs.ids.lp.activity.Activity;
-import it.unicam.cs.ids.lp.activity.ActivityAccount;
-import it.unicam.cs.ids.lp.activity.ActivityAccountRepository;
 import it.unicam.cs.ids.lp.activity.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,19 +9,16 @@ import java.util.Objects;
 
 @Service
 public class ActivityRegistrationService
-        implements ActivityDataValidator<Activity>, ActivityRegistry<Activity, ActivityAccount> {
+        implements ActivityDataValidator<Activity>, ActivityRegistry<Activity> {
 
     @Autowired
     private ActivityRepository activityRepository;
-    @Autowired
-    private ActivityAccountRepository activityAccountRepository;
 
     @Override
-    public boolean registerActivity(Activity activity, ActivityAccount activityAccount) {
+    public boolean registerActivity(Activity activity) {
         if (!areActivityValuesValid(activity))
             return false;
         activityRepository.save(activity);
-        activityAccountRepository.save(activityAccount);
         return true;
     }
 

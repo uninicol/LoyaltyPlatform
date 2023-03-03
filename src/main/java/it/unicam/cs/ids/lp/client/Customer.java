@@ -1,17 +1,16 @@
 package it.unicam.cs.ids.lp.client;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.lp.client.card.CustomerCard;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 
-import java.util.Objects;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -21,21 +20,23 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class Customer {
     @Id
+    private long id;
     private String name;
     private String surname;
     private String telephoneNumber;
     private String email;
-    @OneToOne(mappedBy = "customer")
-    private CustomerAccount customerAccount;
+    @JsonIgnore
+    private String password;
+    private LocalDate registrationDate;
     @OneToMany(mappedBy = "id")
     private Set<CustomerCard> cards;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return name != null && Objects.equals(name, customer.name);
+        return id == customer.id && name.equals(customer.name) && surname.equals(customer.surname) && telephoneNumber.equals(customer.telephoneNumber) && email.equals(customer.email) && password.equals(customer.password) && registrationDate.equals(customer.registrationDate) && cards.equals(customer.cards);
     }
 
     @Override
