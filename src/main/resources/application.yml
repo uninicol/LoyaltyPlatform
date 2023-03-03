@@ -18,3 +18,9 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
         format-sql: true
     show-sql: true
+
+loyaltyplatform:
+  app:
+    jwtCookieName: biscotto
+    jwtSecret: èunsegreto
+    jwtExpirationMs: 86400000 #24h

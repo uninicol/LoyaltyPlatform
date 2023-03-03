@@ -23,7 +23,7 @@ public class Card {
     private Integer id;
     @Transient
     private List<Rule<?>> rules;
-    @OneToMany(mappedBy = "card", orphanRemoval = true)
+    @OneToMany(mappedBy = "card", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Activity> activities;
 
     @Enumerated(EnumType.STRING)

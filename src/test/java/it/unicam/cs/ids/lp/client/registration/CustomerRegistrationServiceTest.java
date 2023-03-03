@@ -1,7 +1,6 @@
 package it.unicam.cs.ids.lp.client.registration;
 
 import it.unicam.cs.ids.lp.client.Customer;
-import it.unicam.cs.ids.lp.client.CustomerAccount;
 import it.unicam.cs.ids.lp.client.card.CustomerCard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,20 +18,16 @@ class CustomerRegistrationServiceTest {
     @Test
     void registerCustomer() {
         assertThrows(NullPointerException.class,
-                () -> customerRegistrationService.registerCustomer(null, new CustomerAccount(), new CustomerCard()));
+                () -> customerRegistrationService.registerCustomer(null, new CustomerCard()));
         Customer customer = new Customer();
         customer.setName("Steve");
         customer.setSurname("jobs");
         customer.setEmail("StivJobs@gmail.com");
         customer.setTelephoneNumber("132-456-7890");
-
         CustomerCard customerCard = new CustomerCard();
         customerCard.setCustomer(customer);
-
-        CustomerAccount customerAccount = new CustomerAccount();
-        customerAccount.setCustomer(customer);
-        customerAccount.setPassword("SteveIlJobs");
-        Assertions.assertTrue(customerRegistrationService.registerCustomer(customer, customerAccount, customerCard));
+        customer.setPassword("SteveIlJobs");
+        Assertions.assertTrue(customerRegistrationService.registerCustomer(customer, customerCard));
     }
 
     @Test
