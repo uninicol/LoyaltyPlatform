@@ -1,8 +1,7 @@
-package it.unicam.cs.ids.lp.fsdfdsafdsafdsaf;
+package it.unicam.cs.ids.lp.JWT_auth;
 
 
 import io.jsonwebtoken.*;
-import it.unicam.cs.ids.lp.client.Customer;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -36,18 +35,17 @@ public class JwtUtils {
         }
     }
 
-    public ResponseCookie generateJwtCookie(Customer customer) {
+    public ResponseCookie generateJwtCookie(CustomerDetailsImpl customer) {
         String jwt = generateTokenFromEmail(customer.getEmail());
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
-        return cookie;
+        return ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(jwtExpirationMs)
+                .httpOnly(true).build();
     }
 
     public ResponseCookie getCleanJwtCookie() {
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
-        return cookie;
+        return ResponseCookie.from(jwtCookie, null).path("/api").build();
     }
 
-    public String getUserNameFromJwtToken(String token) {
+    public String getEmailFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 

@@ -1,10 +1,9 @@
 package it.unicam.cs.ids.lp.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import it.unicam.cs.ids.lp.JWT_auth.Role;
 import it.unicam.cs.ids.lp.client.card.CustomerCard;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -30,6 +29,12 @@ public class Customer {
     private LocalDate registrationDate;
     @OneToMany(mappedBy = "id")
     private Set<CustomerCard> cards;
+
+    @ManyToMany
+    @JoinTable(name = "customer_roles",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {

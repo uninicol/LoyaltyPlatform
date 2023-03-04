@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.lp.fsdfdsafdsafdsaf;
+package it.unicam.cs.ids.lp.JWT_auth;
 
 import it.unicam.cs.ids.lp.client.Customer;
 import it.unicam.cs.ids.lp.client.CustomerRepository;
@@ -15,10 +15,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Customer customerAccount = customerRepository.findByEmail(email)
+        Customer customer = customerRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with email: " + email));
 
-        return CustomerDetailsImpl.build(customerAccount);
+        return CustomerDetailsImpl.build(customer);
     }
 
 }

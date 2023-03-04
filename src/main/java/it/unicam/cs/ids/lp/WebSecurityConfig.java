@@ -1,8 +1,8 @@
 package it.unicam.cs.ids.lp;
 
-import it.unicam.cs.ids.lp.fsdfdsafdsafdsaf.AuthEntryPointJwt;
-import it.unicam.cs.ids.lp.fsdfdsafdsafdsaf.AuthTokenFilter;
-import it.unicam.cs.ids.lp.fsdfdsafdsafdsaf.UserDetailsServiceImpl;
+import it.unicam.cs.ids.lp.JWT_auth.AuthEntryPointJwt;
+import it.unicam.cs.ids.lp.JWT_auth.AuthTokenFilter;
+import it.unicam.cs.ids.lp.JWT_auth.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
