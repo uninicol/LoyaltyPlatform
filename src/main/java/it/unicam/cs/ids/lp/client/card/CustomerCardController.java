@@ -24,7 +24,7 @@ public class CustomerCardController {
     public ResponseEntity<?> addCustomerCard(@PathVariable String customerName, @PathVariable Integer cardId) {
         CustomerCard customerCard = new CustomerCard();
         customerCard.setCard(cardRepository.findById(cardId).orElseThrow());
-        customerCard.setCustomer(customerRepository.findById(customerName).orElseThrow());
+        // TODO customerCard.setCustomer(customerRepository.findById(customerName).orElseThrow());
         customerCardRepository.save(customerCard);
         return new ResponseEntity<>(HttpStatus.OK);
     }

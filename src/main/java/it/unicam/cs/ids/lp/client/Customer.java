@@ -19,6 +19,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class Customer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String surname;
@@ -27,13 +28,10 @@ public class Customer {
     @JsonIgnore
     private String password;
     private LocalDate registrationDate;
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "id", fetch = FetchType.EAGER)
     private Set<CustomerCard> cards;
-
-    @ManyToMany
-    @JoinTable(name = "customer_roles",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
     @Override

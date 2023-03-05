@@ -2,6 +2,7 @@ package it.unicam.cs.ids.lp.JWT_auth;
 
 
 import io.jsonwebtoken.*;
+import it.unicam.cs.ids.lp.client.auth.CustomerDetailsImpl;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -28,11 +29,7 @@ public class JwtUtils {
 
     public String getJwtFromCookies(HttpServletRequest request) {
         Cookie cookie = WebUtils.getCookie(request, jwtCookie);
-        if (cookie != null) {
-            return cookie.getValue();
-        } else {
-            return null;
-        }
+        return cookie == null ? null : cookie.getValue();
     }
 
     public ResponseCookie generateJwtCookie(CustomerDetailsImpl customer) {

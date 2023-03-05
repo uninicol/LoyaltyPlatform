@@ -48,12 +48,9 @@ Content-Type: application/json
 {
   "name": "Gianni",
   "surname": "Di costanzo",
-  "email": "gianni.dicostanzo@gmail.com",
+  "email": "gianni.dicgofdstandzo@gmail.com",
   "password": "SonoGianni007",
-  "telephoneNumber": "3356785378",
-  "role": [
-    "ROLE_USER"
-  ]
+  "telephoneNumber": "3356785378"
 }
 
 <> 2023-03-04T124620.200.txt

@@ -1,6 +1,8 @@
-package it.unicam.cs.ids.lp.JWT_auth;
+package it.unicam.cs.ids.lp.client.auth;
 
 
+import it.unicam.cs.ids.lp.JWT_auth.JwtUtils;
+import it.unicam.cs.ids.lp.JWT_auth.Role;
 import it.unicam.cs.ids.lp.client.Customer;
 import it.unicam.cs.ids.lp.client.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +14,19 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("client/auth")
 public class AuthController {
-    @Autowired
-    RoleRepository roleRepository;
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -51,7 +54,6 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Error: Email is already in use!");
         }
 
-        // Create new customer's account
         Customer customer = new Customer();
         customer.setName(signUpRequest.name);
         customer.setSurname(signUpRequest.surname);
@@ -60,39 +62,24 @@ public class AuthController {
         customer.setTelephoneNumber(signUpRequest.telephoneNumber);
         customer.setRegistrationDate(LocalDate.now());
 
-        Set<String> strRoles = signUpRequest.role;
         Set<Role> roles = new HashSet<>();
-
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin" -> {
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-                    }
-                    case "mod" -> {
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
-                    }
-                    default -> {
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                    }
-                }
-            });
-        }
-
+        if (signUpRequest.roles == null)
+            roles.add(Role.ROLE_USER);
+        else
+            roles = signUpRequest.roles.stream()
+                    .map(this::getRole)
+                    .collect(Collectors.toSet());
         customer.setRoles(roles);
         customerRepository.save(customer);
-
         return ResponseEntity.ok("User registered successfully!");
+    }
+
+    private Role getRole(String role) {
+        return switch (role) {
+            case "admin" -> Role.ROLE_ADMIN;
+            case "mod" -> Role.ROLE_MODERATOR;
+            default -> Role.ROLE_USER;
+        };
     }
 
     @PostMapping("/signout")
@@ -109,6 +96,6 @@ public class AuthController {
     }
 
     private record SignupRequest(String name, String surname, String email, String password, String telephoneNumber,
-                                 Set<String> role) {
+                                 Set<String> roles) {
     }
 }

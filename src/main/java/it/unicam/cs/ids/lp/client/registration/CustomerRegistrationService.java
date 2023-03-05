@@ -79,6 +79,6 @@ public class CustomerRegistrationService
     }
 
     public void unregisterCustomerByName(String name) {
-        customerRepository.deleteById(name);
+        // TODO customerRepository.deleteById(name);
     }
 }

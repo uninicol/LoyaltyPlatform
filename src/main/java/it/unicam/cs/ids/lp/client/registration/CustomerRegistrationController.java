@@ -44,7 +44,7 @@ public class CustomerRegistrationController {
     private CustomerCard setCustomerCard(CustomerRequest customerRequest) {
         CustomerCard customerCard = new CustomerCard();
         customerCard.setFamily(customerRequest.isFamily);
-        customerCard.setCustomer(customerRepository.findById(customerRequest.name).orElseThrow());
+       // TODO customerCard.setCustomer(customerRepository.findById(customerRequest).orElseThrow());
         return customerCard;
     }
 

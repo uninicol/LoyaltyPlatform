@@ -1,4 +1,4 @@
-package it.unicam.cs.ids.lp.JWT_auth;
+package it.unicam.cs.ids.lp.client.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids.lp.client.Customer;
@@ -22,10 +22,11 @@ public class CustomerDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
+    //TODO in caso aggiungere anche telefono, carte ecc.
 
     public static CustomerDetailsImpl build(Customer customer) {
         List<GrantedAuthority> authorities = customer.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+                .map(role -> new SimpleGrantedAuthority(role.name()))
                 .collect(Collectors.toList());
         return new CustomerDetailsImpl(
                 customer.getId(),

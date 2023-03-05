@@ -21,6 +21,6 @@ spring:
 
 loyaltyplatform:
   app:
-    jwtCookieName: LoyaltyPlatform
+    jwtCookieName: platform_user
     jwtSecret: UnaChiaveSegretissimaLunghissima
     jwtExpirationMs: 86400000 #24h
