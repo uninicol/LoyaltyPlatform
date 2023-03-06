@@ -1,12 +1,11 @@
 ###
 POST http://localhost:8080/api/client/auth/signup
 Content-Type: application/json
-Origin: http://fdsafd
 
 {
   "name": "Gianni",
   "surname": "Di costanzo",
-  "email": "gianni.dfgffivcvcostavdstgertnzo@gmail.com",
+  "email": "gianni.digfcostanzo@gmail.com",
   "password": "SonoGianni007",
   "telephoneNumber": "3356785378"
 }
@@ -16,7 +15,7 @@ POST http://localhost:8080/api/client/auth/signin
 Content-Type: application/json
 
 {
-  "email": "gianni.dicostanzo@gmail.com",
+  "email": "gianni.digfcostanzo@gmail.com",
   "password": "SonoGianni007"
 }
 

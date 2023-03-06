@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8080/api/activityCard/createCard/Amazon
+PUT http://localhost:8080/api/activityCard/createCard/1
 Content-Type: application/json
 
 {
