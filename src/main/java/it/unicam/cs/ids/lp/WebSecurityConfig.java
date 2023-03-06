@@ -51,16 +51,6 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
-//        configuration.setAllowedMethods(List.of("GET", "POST", "PUT"));
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
-
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
@@ -80,6 +70,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests().requestMatchers("/**").permitAll()// TODO sistemare pattern
                 //.requestMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
+        http.headers().xssProtection();
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
