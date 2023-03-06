@@ -16,14 +16,13 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 public class CustomerCard {
-    @ManyToOne
-    private Customer customer;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
     @ManyToOne
-    @JoinColumn
+    private Customer customer;
+    @ManyToOne
     private Card card;
     private Integer points = 0;
     private Integer tier = 1;

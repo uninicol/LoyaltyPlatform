@@ -1,7 +1,6 @@
 package it.unicam.cs.ids.lp.client.registration;
 
 import it.unicam.cs.ids.lp.client.Customer;
-import it.unicam.cs.ids.lp.client.CustomerAccount;
 import it.unicam.cs.ids.lp.client.CustomerRepository;
 import it.unicam.cs.ids.lp.client.card.CustomerCard;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +24,10 @@ public class CustomerRegistrationController {
     @PutMapping("/customerRegistration/register")
     public ResponseEntity<?> registerCustomer(@RequestBody CustomerRequest customerRequest) {
         Customer customer = setCustomer(customerRequest);
-        CustomerAccount customerAccount = setCustomerProfile(customerRequest);
         CustomerCard customerCard = setCustomerCard(customerRequest);
-        boolean registered = customerRegistrationService.registerCustomer(customer, customerAccount, customerCard);
+        boolean registered = customerRegistrationService.registerCustomer(customer, customerCard);
         if (registered) return new ResponseEntity<>(HttpStatus.CREATED);
         else return new ResponseEntity<>(HttpStatus.CONFLICT);
-    }
-
-    private CustomerAccount setCustomerProfile(CustomerRequest customerRequest) {
-        CustomerAccount customerAccount = new CustomerAccount();
-        customerAccount.setCustomer(customerRepository.findById(customerRequest.name()).orElseThrow());
-        customerAccount.setPassword(passwordEncoder.encode(customerRequest.password()));
-        customerAccount.setRegistrationDate(LocalDate.now());
-        return customerAccount;
     }
 
     private Customer setCustomer(CustomerRequest customerRequest) {
@@ -46,13 +36,15 @@ public class CustomerRegistrationController {
         customer.setSurname(customerRequest.surname());
         customer.setTelephoneNumber(customerRequest.telephoneNumber());
         customer.setEmail(customerRequest.email());
+        customer.setPassword(passwordEncoder.encode(customerRequest.password()));
+        customer.setRegistrationDate(LocalDate.now());
         return customer;
     }
 
     private CustomerCard setCustomerCard(CustomerRequest customerRequest) {
         CustomerCard customerCard = new CustomerCard();
         customerCard.setFamily(customerRequest.isFamily);
-        customerCard.setCustomer(customerRepository.findById(customerRequest.name).orElseThrow());
+       // TODO customerCard.setCustomer(customerRepository.findById(customerRequest).orElseThrow());
         return customerCard;
     }
 
