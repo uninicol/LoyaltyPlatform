@@ -40,9 +40,7 @@ public class CustomerController {
                 .map(Campaign::getId)
                 .anyMatch(id -> id.equals(campaignId));
         //if (customerRepository.existsByCards_ActivityCard_Campaign(campaignRepository.getReferenceById(campaignId)))
-        if (isRegistered)
-            return ResponseEntity.ok().body(true);
-        else return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        return ResponseEntity.ok().body(isRegistered);
     }
 
     @PostMapping("/{customerId}/registerTo/{campaignId}")
