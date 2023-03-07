@@ -22,9 +22,9 @@ public class CampaignController {
     private CardRepository cardRepository;
 
     @PutMapping("/{cardId}/add")
-    public ResponseEntity<?> addCampaign(@PathVariable Integer cardId, @RequestBody CampaignRequest campaignRequest) {
+    public ResponseEntity<?> addCampaign(@PathVariable Long cardId, @RequestBody CampaignRequest campaignRequest) {
         Campaign campaign = new Campaign();
-        campaign.setCard(cardRepository.findById(cardId).orElseThrow());
+        campaign.setActivityCard(cardRepository.findById(cardId).orElseThrow());
         campaign.setDescription(campaignRequest.description);
         campaign.setShortDescription(campaignRequest.shortDescription);
         campaign.setShopUrl(campaignRequest.shopUrl);
@@ -34,18 +34,21 @@ public class CampaignController {
     }
 
     @GetMapping("/getCampaigns")
-    public ResponseEntity<?> getCampaigns() {
-        List<?> list = campaignRepository.findAll()
+    public ResponseEntity<List<CampaignDTO>> getCampaigns() {
+        List<CampaignDTO> list = campaignRepository.findAll()
                 .stream()
                 .map(campaign -> new CampaignDTO(
-                        activityRepository.findByCard_Id(campaign.getCard().getId()).stream()
+                        campaign.getId(),
+                        activityRepository.findByCard_Id(campaign.getActivityCard().getId()).stream()
                                 .map(Activity::getName).toList(),
                         campaign.getCategory(), campaign.getDescription(),
-                        campaign.getShortDescription(), campaign.getShopUrl())).toList();
+                        campaign.getShortDescription(), campaign.getShopUrl()))
+                .toList();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    private record CampaignDTO(List<String> activityName, Activity.ContentCategory category, String description,
+    private record CampaignDTO(long id, List<String> activityName, Activity.ContentCategory category,
+                               String description,
                                String shortDescription, String shopUrl) {
     }
 

@@ -7,6 +7,8 @@ import java.util.List;
 
 @Repository
 public interface ActivityRepository
-        extends JpaRepository<Activity, String> {
-    List<Activity> findByCard_Id(Integer id);
+        extends JpaRepository<Activity, Long> {
+    List<Activity> findByCard_Id(long id);
+
+    long deleteByName(String name);
 }

@@ -1,6 +1,7 @@
 package it.unicam.cs.ids.lp.activity.card;
 
 import it.unicam.cs.ids.lp.activity.Activity;
+import it.unicam.cs.ids.lp.activity.campaign.Campaign;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +21,19 @@ public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private Integer id;
+    private Long id;
     @Transient
     private List<Rule<?>> rules;
     @OneToMany(mappedBy = "card", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @ToString.Exclude
     private List<Activity> activities;
 
     @Enumerated(EnumType.STRING)
     private CardProgram program;
+
+    @ManyToOne
+    @JoinColumn(name = "campaign_id")
+    private Campaign campaign;
 
     @Override
     public boolean equals(Object o) {

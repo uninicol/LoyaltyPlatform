@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "name": "Gianni",
   "surname": "Di costanzo",
-  "email": "gianni.digfcostanzo@gmail.com",
+  "email": "gianni.dicostanzo@gmail.com",
   "password": "SonoGianni007",
   "telephoneNumber": "3356785378"
 }
@@ -15,7 +15,7 @@ POST http://localhost:8080/api/client/auth/signin
 Content-Type: application/json
 
 {
-  "email": "gianni.digfcostanzo@gmail.com",
+  "email": "gianni.dicostanzo@gmail.com",
   "password": "SonoGianni007"
 }
 

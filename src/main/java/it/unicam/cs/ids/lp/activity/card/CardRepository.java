@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface CardRepository extends JpaRepository<Card, Integer> {
+public interface CardRepository extends JpaRepository<Card, Long> {
     @Transactional
     @Modifying
     @Query("update Card c set c.activities = ?1")
-    int updateActivitiesBy(@NonNull List<Activity> activities);
+    long updateActivitiesBy(@NonNull List<Activity> activities);
 }

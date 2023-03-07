@@ -18,10 +18,10 @@ public class CardController {
     @Autowired
     private CardRepository cardRepository;
 
-    @PutMapping("/createCard/{activityName}")
-    public ResponseEntity<?> createCard(@PathVariable String activityName, @RequestBody CardRequest cardRequest) {
+    @PutMapping("/createCard/{activityId}")
+    public ResponseEntity<?> createCard(@PathVariable Long activityId, @RequestBody CardRequest cardRequest) {
         //TODO funziona ma da errore di connessione(?)
-        Activity activity = activityRepository.getReferenceById(activityName);
+        Activity activity = activityRepository.getReferenceById(activityId);
         Card card = new Card();
         card.setProgram(cardRequest.program);
         card.setRules(cardRequest.rules);
@@ -31,11 +31,11 @@ public class CardController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/{cardId}/addActivity/{activityName}")
-    public ResponseEntity<?> addActivity(@PathVariable String activityName, @PathVariable Integer cardId) {
+    @PostMapping("/{cardId}/addActivity/{activityId}")
+    public ResponseEntity<?> addActivity(@PathVariable long activityId, @PathVariable Long cardId) {
         List<Activity> list = cardRepository.findById(cardId).orElseThrow()
                 .getActivities();
-        list.add(activityRepository.findById(activityName).orElseThrow());
+        list.add(activityRepository.findById(activityId).orElseThrow());
         cardRepository.updateActivitiesBy(list);
         return new ResponseEntity<>(HttpStatus.OK);
     }

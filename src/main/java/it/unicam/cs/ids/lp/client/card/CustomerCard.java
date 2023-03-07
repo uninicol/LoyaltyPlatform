@@ -23,7 +23,7 @@ public class CustomerCard {
     @ManyToOne
     private Customer customer;
     @ManyToOne
-    private Card card;
+    private Card activityCard;
     private Integer points = 0;
     private Integer tier = 1;
     private Boolean family = false;

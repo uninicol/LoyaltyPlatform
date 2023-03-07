@@ -90,6 +90,6 @@ public class ActivityRegistrationService
     }
 
     public void unregisterActivityByName(String name) {
-        activityRepository.deleteById(name);
+        activityRepository.deleteByName(name);
     }
 }

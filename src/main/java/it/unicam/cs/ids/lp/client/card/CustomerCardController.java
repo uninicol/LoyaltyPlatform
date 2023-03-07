@@ -20,13 +20,25 @@ public class CustomerCardController {
     @Autowired
     private CustomerRepository customerRepository;
 
-    @PutMapping("/add/{customerName}/{cardId}")
-    public ResponseEntity<?> addCustomerCard(@PathVariable String customerName, @PathVariable Integer cardId) {
-        CustomerCard customerCard = new CustomerCard();
-        customerCard.setCard(cardRepository.findById(cardId).orElseThrow());
-        // TODO customerCard.setCustomer(customerRepository.findById(customerName).orElseThrow());
-        customerCardRepository.save(customerCard);
+    @PutMapping("/add/{customerId}/{cardId}")
+    public ResponseEntity<?> addCustomerCard(@PathVariable Long customerId, @PathVariable long cardId) {
+        saveCustomerCard(createCustomerCard(customerId, cardId));
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public CustomerCard createCustomerCard(long customerId, long cardId) {
+        CustomerCard customerCard = new CustomerCard();
+        customerCard.setActivityCard(cardRepository.getReferenceById(cardId));
+        customerCard.setCustomer(customerRepository.getReferenceById(customerId));
+        return customerCard;
+    }
+
+    public CustomerCard saveCustomerCard(CustomerCard customerCard) {
+        return customerCardRepository.save(customerCard);
+    }
+
+    public CustomerCard saveCustomerCard(long customerId, long cardId) {
+        return saveCustomerCard(createCustomerCard(customerId, cardId));
     }
 
     @GetMapping("/{customerName}/getCards")

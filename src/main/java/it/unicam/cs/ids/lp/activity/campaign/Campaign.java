@@ -20,10 +20,10 @@ public class Campaign {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private long id;
     @ManyToOne
     @JoinColumn(name = "card_id")
-    private Card card;
+    private Card activityCard;
     private String description;
     private String shortDescription;
     private String shopUrl;
@@ -35,7 +35,7 @@ public class Campaign {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Campaign campaign = (Campaign) o;
-        return getCard() != null && Objects.equals(getCard(), campaign.getCard());
+        return getActivityCard() != null && Objects.equals(getActivityCard(), campaign.getActivityCard());
     }
 
     @Override
