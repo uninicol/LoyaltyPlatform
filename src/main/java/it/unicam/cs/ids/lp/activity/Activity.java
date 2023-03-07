@@ -47,14 +47,4 @@ public class Activity {
     public int hashCode() {
         return getClass().hashCode();
     }
-
-    public enum ContentCategory {
-        MODA,
-        TECNOLOGIA,
-        BELLEZZA,
-        FITNESS_E_SALUTE,
-        LIFESTYLE,
-        SPORT,
-        ISTRUZIONE
-    }
 }

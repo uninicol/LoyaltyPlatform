@@ -1,6 +1,6 @@
 package it.unicam.cs.ids.lp.activity.campaign;
 
-import it.unicam.cs.ids.lp.activity.Activity;
+import it.unicam.cs.ids.lp.activity.ContentCategory;
 import it.unicam.cs.ids.lp.activity.card.Card;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,7 +28,7 @@ public class Campaign {
     private String shortDescription;
     private String shopUrl;
     @Enumerated(EnumType.STRING)
-    private Activity.ContentCategory category;
+    private ContentCategory category;
 
     @Override
     public boolean equals(Object o) {

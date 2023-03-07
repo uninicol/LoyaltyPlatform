@@ -2,6 +2,7 @@ package it.unicam.cs.ids.lp.activity.campaign;
 
 import it.unicam.cs.ids.lp.activity.Activity;
 import it.unicam.cs.ids.lp.activity.ActivityRepository;
+import it.unicam.cs.ids.lp.activity.ContentCategory;
 import it.unicam.cs.ids.lp.activity.card.Card;
 import it.unicam.cs.ids.lp.activity.card.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +51,12 @@ public class CampaignController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    private record CampaignDTO(long id, List<String> activityName, Activity.ContentCategory category,
+    private record CampaignDTO(long id, List<String> activityName, ContentCategory category,
                                String description,
                                String shortDescription, String shopUrl) {
     }
 
     private record CampaignRequest(String description, String shortDescription, String shopUrl,
-                                   Activity.ContentCategory category) {
+                                   ContentCategory category) {
     }
 }
