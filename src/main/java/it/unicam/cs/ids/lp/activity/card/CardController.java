@@ -20,7 +20,6 @@ public class CardController {
 
     @PutMapping("/createCard/{activityId}")
     public ResponseEntity<?> createCard(@PathVariable Long activityId, @RequestBody CardRequest cardRequest) {
-        //TODO funziona ma da errore di connessione(?)
         Activity activity = activityRepository.getReferenceById(activityId);
         Card card = new Card();
         card.setProgram(cardRequest.program);

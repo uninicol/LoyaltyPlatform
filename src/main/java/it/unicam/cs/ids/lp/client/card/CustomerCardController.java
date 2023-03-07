@@ -22,7 +22,7 @@ public class CustomerCardController {
 
     @PutMapping("/add/{customerId}/{cardId}")
     public ResponseEntity<?> addCustomerCard(@PathVariable Long customerId, @PathVariable long cardId) {
-        saveCustomerCard(createCustomerCard(customerId, cardId));
+        saveCustomerCard(customerId, cardId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -41,11 +41,10 @@ public class CustomerCardController {
         return saveCustomerCard(createCustomerCard(customerId, cardId));
     }
 
-    @GetMapping("/{customerName}/getCards")
-    public ResponseEntity<?> getCustomerCards(@PathVariable String customerName) {
+    @GetMapping("/{customerId}/getCards")
+    public ResponseEntity<?> getCustomerCards(@PathVariable long customerId) {
         //TODO fare test
-        List<CustomerCard> customerCards = customerCardRepository.findByCustomer_NameLike(customerName);
+        List<CustomerCard> customerCards = customerCardRepository.findByCustomer_Id(customerId);
         return new ResponseEntity<>(customerCards, HttpStatus.OK);
-        //return new ResponseEntity<>(cardRepository.findAll(cardRepository.getCustomerCards(customerName)),HttpStatus.OK);
     }
 }

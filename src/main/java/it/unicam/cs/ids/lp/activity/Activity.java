@@ -49,8 +49,12 @@ public class Activity {
     }
 
     public enum ContentCategory {
-        TECH,
+        MODA,
+        TECNOLOGIA,
+        BELLEZZA,
+        FITNESS_E_SALUTE,
         LIFESTYLE,
-        FITNESS,
+        SPORT,
+        ISTRUZIONE
     }
 }

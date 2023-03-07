@@ -2,6 +2,7 @@ package it.unicam.cs.ids.lp.activity.campaign;
 
 import it.unicam.cs.ids.lp.activity.Activity;
 import it.unicam.cs.ids.lp.activity.ActivityRepository;
+import it.unicam.cs.ids.lp.activity.card.Card;
 import it.unicam.cs.ids.lp.activity.card.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,12 +24,14 @@ public class CampaignController {
 
     @PutMapping("/{cardId}/add")
     public ResponseEntity<?> addCampaign(@PathVariable Long cardId, @RequestBody CampaignRequest campaignRequest) {
+        Card card = cardRepository.getReferenceById(cardId);
         Campaign campaign = new Campaign();
-        campaign.setActivityCard(cardRepository.findById(cardId).orElseThrow());
+        campaign.setActivityCard(card);
         campaign.setDescription(campaignRequest.description);
         campaign.setShortDescription(campaignRequest.shortDescription);
         campaign.setShopUrl(campaignRequest.shopUrl);
         campaign.setCategory(campaignRequest.category);
+        card.setCampaign(campaign);
         campaignRepository.save(campaign);
         return new ResponseEntity<>(HttpStatus.OK);
     }

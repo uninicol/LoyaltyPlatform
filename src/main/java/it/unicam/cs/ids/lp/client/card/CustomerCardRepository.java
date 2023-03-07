@@ -3,7 +3,6 @@ package it.unicam.cs.ids.lp.client.card;
 import it.unicam.cs.ids.lp.client.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +11,8 @@ import java.util.List;
 public interface CustomerCardRepository
         extends JpaRepository<CustomerCard, Customer>,
         JpaSpecificationExecutor<CustomerCard> {
-    List<CustomerCard> findByCustomer_NameLike(@NonNull String name);
+    List<CustomerCard> findByCustomer_Id(long id);
+
 
 //    @Transactional
 //    @Modifying

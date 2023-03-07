@@ -1,0 +1,296 @@
+###
+PUT http://localhost:8080/api/activityRegistration/register
+Content-Type: application/json
+
+{
+  "name": "Amazon",
+  "address": "via amazon 5",
+  "telephoneNumber": "345-446-3456",
+  "email": "prova@amazon.com",
+  "password": "Ciao01!",
+  "category": "TECNOLOGIA"
+}
+
+###
+PUT http://localhost:8080/api/activityCard/createCard/1
+Content-Type: application/json
+
+{
+  "rules": null,
+  "program": "Membership"
+}
+
+<> 2023-03-02T195653.500.json
+
+
+###
+PUT http://localhost:8080/api/campaign/1/add
+Content-Type: application/json
+
+{
+  "category": "TECNOLOGIA",
+  "description": "Unisciti a Amazon Prime e ottieni accesso a consegne veloci, streaming video e musica, e sconti su prodotti.",
+  "shortDescription": "Ottieni accesso a consegne veloci, streaming e sconti su prodotti con Amazon Prime",
+  "shopUrl": "https://www.amazon.com/"
+}
+
+###-------------------------------
+###
+PUT http://localhost:8080/api/activityRegistration/register
+Content-Type: application/json
+
+{
+  "name": "Udemy",
+  "address": "via amazon 5",
+  "telephoneNumber": "345-446-3456",
+  "email": "prova@udemy.com",
+  "password": "Ciao01!",
+  "category": "ISTRUZIONE"
+}
+
+###
+PUT http://localhost:8080/api/activityCard/createCard/2
+Content-Type: application/json
+
+{
+  "rules": null,
+  "program": "Membership"
+}
+
+<> 2023-03-02T195653.500.json
+
+
+###
+PUT http://localhost:8080/api/campaign/2/add
+Content-Type: application/json
+
+{
+  "category": "ISTRUZIONE",
+  "description": "Unisciti al programma di fidelizzazione Udemy Plus e ottieni accesso a corsi illimitati, supporto prioritario e altri vantaggi.",
+  "shortDescription": "Ottieni accesso a corsi illimitati, supporto prioritario e vantaggi con il programma di fidelizzazione di Udemy.",
+  "shopUrl": "https://www.udemy.com/"
+}
+
+###--------------------------
+###
+PUT http://localhost:8080/api/activityRegistration/register
+Content-Type: application/json
+
+{
+  "name": "Starbucks",
+  "address": "via amazon 5",
+  "telephoneNumber": "345-446-3456",
+  "email": "prova@starbucks.com",
+  "password": "Ciao01!",
+  "category": "LIFESTYLE"
+}
+
+###
+PUT http://localhost:8080/api/activityCard/createCard/3
+Content-Type: application/json
+
+{
+  "rules": null,
+  "program": "Membership"
+}
+
+<> 2023-03-02T195653.500.json
+
+
+###
+PUT http://localhost:8080/api/campaign/3/add
+Content-Type: application/json
+
+{
+  "category": "LIFESTYLE",
+  "description": "Unisciti al programma di fidelizzazione Starbucks Rewards e ottieni accesso a punti, premi e ricompense esclusive.",
+  "shortDescription": "Ottieni accesso a punti, premi e ricompense esclusive con Starbucks Rewards.",
+  "shopUrl": "https://www.starbucks.com/"
+}
+
+###--------------------------
+###
+PUT http://localhost:8080/api/activityRegistration/register
+Content-Type: application/json
+
+{
+  "name": "Sephora",
+  "address": "via amazon 5",
+  "telephoneNumber": "345-446-3456",
+  "email": "prova@sephora.com",
+  "password": "Ciao01!",
+  "category": "BELLEZZA"
+}
+
+###
+PUT http://localhost:8080/api/activityCard/createCard/4
+Content-Type: application/json
+
+{
+  "rules": null,
+  "program": "Membership"
+}
+
+<> 2023-03-02T195653.500.json
+
+
+###
+PUT http://localhost:8080/api/campaign/4/add
+Content-Type: application/json
+
+{
+  "category": "BELLEZZA",
+  "description": "Unisciti al programma di fidelizzazione Beauty Insider di Sephora e ottieni accesso a sconti esclusivi, prodotti in anteprima e lezioni di bellezza.",
+  "shortDescription": "Ottieni accesso a sconti, prodotti in anteprima e lezioni di bellezza con Beauty Insider di Sephora.",
+  "shopUrl": "https://www.sephora.com/"
+}
+
+###--------------------------
+###
+PUT http://localhost:8080/api/activityRegistration/register
+Content-Type: application/json
+
+{
+  "name": "Zara",
+  "address": "via amazon 5",
+  "telephoneNumber": "345-446-3456",
+  "email": "prova@zara.com",
+  "password": "Ciao01!",
+  "category": "MODA"
+}
+
+###
+PUT http://localhost:8080/api/activityCard/createCard/5
+Content-Type: application/json
+
+{
+  "rules": null,
+  "program": "Membership"
+}
+
+<> 2023-03-02T195653.500.json
+
+
+###
+PUT http://localhost:8080/api/campaign/5/add
+Content-Type: application/json
+
+{
+  "category": "MODA",
+  "description": "Unisciti al programma di fidelizzazione Zara Club e ottieni accesso a sconti esclusivi, prodotti in anteprima e inviti a eventi esclusivi.",
+  "shortDescription": "Ottieni accesso a sconti, prodotti in anteprima e eventi esclusivi con Zara Club.",
+  "shopUrl": "https://www.zara.com/"
+}
+
+###--------------------------
+###
+PUT http://localhost:8080/api/activityRegistration/register
+Content-Type: application/json
+
+{
+  "name": "Adidas",
+  "address": "via amazon 5",
+  "telephoneNumber": "345-446-3456",
+  "email": "prova@Adidas.com",
+  "password": "Ciao01!",
+  "category": "SPORT"
+}
+
+###
+PUT http://localhost:8080/api/activityCard/createCard/6
+Content-Type: application/json
+
+{
+  "rules": null,
+  "program": "Membership"
+}
+
+<> 2023-03-02T195653.500.json
+
+
+###
+PUT http://localhost:8080/api/campaign/6/add
+Content-Type: application/json
+
+{
+  "category": "SPORT",
+  "description": "Unisciti al programma di fidelizzazione Adidas Creator Club e ottieni accesso a sconti esclusivi, prodotti in anteprima e eventi per i membri.",
+  "shortDescription": "Ottieni accesso a sconti esclusivi, prodotti in anteprima e eventi con il programma di fidelizzazione di Adidas.",
+  "shopUrl": "https://www.adidas.com/"
+}
+
+###--------------------------
+###
+PUT http://localhost:8080/api/activityRegistration/register
+Content-Type: application/json
+
+{
+  "name": "SoulCycle",
+  "address": "via amazon 5",
+  "telephoneNumber": "345-446-3456",
+  "email": "prova@SoulCycle.com",
+  "password": "Ciao01!",
+  "category": "FITNESS_E_SALUTE"
+}
+
+###
+PUT http://localhost:8080/api/activityCard/createCard/7
+Content-Type: application/json
+
+{
+  "rules": null,
+  "program": "Membership"
+}
+
+<> 2023-03-02T195653.500.json
+
+
+###
+PUT http://localhost:8080/api/campaign/7/add
+Content-Type: application/json
+
+{
+  "category": "FITNESS_E_SALUTE",
+  "description": "Diventa un membro di SoulCycle e ottieni accesso a lezioni di ciclismo, eventi esclusivi e promozioni per i membri.",
+  "shortDescription": "Ottieni accesso a lezioni di ciclismo, eventi e promozioni con il programma di fidelizzazione di SoulCycle.",
+  "shopUrl": "https://www.soul-cycle.com/"
+}
+
+###--------------------------
+###
+PUT http://localhost:8080/api/activityRegistration/register
+Content-Type: application/json
+
+{
+  "name": "Lyft",
+  "address": "via amazon 5",
+  "telephoneNumber": "345-446-3456",
+  "email": "prova@Lyft.com",
+  "password": "Ciao01!",
+  "category": "LIFESTYLE"
+}
+
+###
+PUT http://localhost:8080/api/activityCard/createCard/8
+Content-Type: application/json
+
+{
+  "rules": null,
+  "program": "Membership"
+}
+
+<> 2023-03-02T195653.500.json
+
+
+###
+PUT http://localhost:8080/api/campaign/8/add
+Content-Type: application/json
+
+{
+  "category": "LIFESTYLE",
+  "description": "Unisciti al programma di fidelizzazione Lyft Rewards e ottieni accesso a sconti esclusivi, viaggi gratuiti e altri premi.",
+  "shortDescription": "Ottieni accesso a sconti, viaggi gratuiti e premi con il programma di fidelizzazione di Lyft.",
+  "shopUrl": "https://www.lyft.com/"
+}
+
+###--------------------------
