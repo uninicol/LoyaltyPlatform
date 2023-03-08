@@ -20,8 +20,9 @@ public class CampaignController {
 
     @PutMapping("/{cardId}/add")
     public ResponseEntity<?> addCampaign(@PathVariable Long cardId, @RequestBody CampaignRequest campaignRequest) {
-        Card card = cardRepository.getReferenceById(cardId);
+        Card card = cardRepository.findById(cardId).orElseThrow();
         Campaign campaign = campaignMapper.apply(campaignRequest, card);
+        card.setCampaign(campaign);
         campaignRepository.save(campaign);
         return new ResponseEntity<>(HttpStatus.OK);
     }
