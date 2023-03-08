@@ -1,7 +1,9 @@
 package it.unicam.cs.ids.lp.client.card;
 
+import it.unicam.cs.ids.lp.JWT_auth.JwtUtils;
 import it.unicam.cs.ids.lp.activity.card.CardRepository;
 import it.unicam.cs.ids.lp.client.CustomerRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,21 +21,25 @@ public class CustomerCardController {
     private CardRepository cardRepository;
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private JwtUtils jwtUtils;
 
-    @PutMapping("/add/{customerId}/{cardId}")
-    public ResponseEntity<String> addCustomerCard(@PathVariable Long customerId, @PathVariable Long cardId) {
+    @PutMapping("/addCard/{cardId}")
+    public ResponseEntity<String> addCustomerCard(HttpServletRequest request, @PathVariable Long cardId) {
+        String email = jwtUtils.getEmailFromRequest(request);
         CustomerCard customerCard = new CustomerCard();
         customerCard.setCard(cardRepository.findById(cardId).orElseThrow());
-        customerCard.setCustomer(customerRepository.findById(customerId).orElseThrow());
+        customerCard.setCustomer(customerRepository.findByEmail(email).orElseThrow());
         customerCardRepository.save(customerCard);
         return ResponseEntity.ok()
                 .body("Carta aggiunta con successo");
     }
 
-    @GetMapping("/{customerId}/getCards")
-    public ResponseEntity<List<CustomerCard>> getCustomerCards(@PathVariable long customerId) {
+    @GetMapping("/getCards")
+    public ResponseEntity<List<CustomerCard>> getCustomerCards(HttpServletRequest request) {
         // TODO fare test
-        List<CustomerCard> customerCards = customerCardRepository.findByCustomer_Id(customerId);
+        String email = jwtUtils.getEmailFromRequest(request);
+        List<CustomerCard> customerCards = customerCardRepository.findByCustomer_Email(email);
         return new ResponseEntity<>(customerCards, HttpStatus.OK);
     }
 }

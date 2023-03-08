@@ -55,6 +55,10 @@ public class JwtUtils {
                 .getSubject();
     }
 
+    public String getEmailFromRequest(HttpServletRequest request) {
+        return getEmailFromJwtToken(getJwtFromCookies(request));
+    }
+
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser()
