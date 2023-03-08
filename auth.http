@@ -1,4 +1,7 @@
 ###
+POST http://localhost:8080/api/client/auth/signout
+
+###
 POST http://localhost:8080/api/client/auth/signup
 Content-Type: application/json
 
@@ -18,6 +21,3 @@ Content-Type: application/json
   "email": "gianni.dicostanzo@gmail.com",
   "password": "SonoGianni007"
 }
-
-###
-POST http://localhost:8080/api/client/auth/signout

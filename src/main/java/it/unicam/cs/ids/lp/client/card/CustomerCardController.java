@@ -21,29 +21,17 @@ public class CustomerCardController {
     private CustomerRepository customerRepository;
 
     @PutMapping("/add/{customerId}/{cardId}")
-    public ResponseEntity<?> addCustomerCard(@PathVariable Long customerId, @PathVariable long cardId) {
-        saveCustomerCard(customerId, cardId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    public CustomerCard createCustomerCard(long customerId, long cardId) {
+    public ResponseEntity<?> addCustomerCard(@PathVariable Long customerId, @PathVariable Long cardId) {
         CustomerCard customerCard = new CustomerCard();
-        customerCard.setActivityCard(cardRepository.getReferenceById(cardId));
-        customerCard.setCustomer(customerRepository.getReferenceById(customerId));
-        return customerCard;
-    }
-
-    public CustomerCard saveCustomerCard(CustomerCard customerCard) {
-        return customerCardRepository.save(customerCard);
-    }
-
-    public CustomerCard saveCustomerCard(long customerId, long cardId) {
-        return saveCustomerCard(createCustomerCard(customerId, cardId));
+        customerCard.setCard(cardRepository.findById(cardId).orElseThrow());
+        customerCard.setCustomer(customerRepository.findById(customerId).orElseThrow());
+        customerCardRepository.save(customerCard);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{customerId}/getCards")
     public ResponseEntity<?> getCustomerCards(@PathVariable long customerId) {
-        //TODO fare test
+        // TODO fare test
         List<CustomerCard> customerCards = customerCardRepository.findByCustomer_Id(customerId);
         return new ResponseEntity<>(customerCards, HttpStatus.OK);
     }

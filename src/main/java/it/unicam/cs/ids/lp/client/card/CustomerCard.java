@@ -21,9 +21,11 @@ public class CustomerCard {
     @Column(nullable = false)
     private Long id;
     @ManyToOne
+    @JoinColumn
     private Customer customer;
     @ManyToOne
-    private Card activityCard;
+    @JoinColumn
+    private Card card;
     private Integer points = 0;
     private Integer tier = 1;
     private Boolean family = false;

@@ -11,4 +11,5 @@ public interface CustomerRepository
     boolean existsByEmail(String email);
 
     Optional<Customer> findByEmail(String email);
+
 }

@@ -2,9 +2,8 @@ package it.unicam.cs.ids.lp.client;
 
 import it.unicam.cs.ids.lp.activity.campaign.Campaign;
 import it.unicam.cs.ids.lp.activity.campaign.CampaignRepository;
-import it.unicam.cs.ids.lp.activity.card.Card;
-import it.unicam.cs.ids.lp.client.card.CustomerCard;
 import it.unicam.cs.ids.lp.client.card.CustomerCardController;
+import it.unicam.cs.ids.lp.client.card.CustomerCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,22 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/client")
 public class CustomerController {
-
-    @Autowired
-    private CustomerRepository customerRepository;
     @Autowired
     private CampaignRepository campaignRepository;
     @Autowired
     private CustomerCardController customerCardController;
+    @Autowired
+    private CustomerCardRepository customerCardRepository;
 
     @PostMapping("/{customerId}/isRegisteredTo/{campaignId}")
     public ResponseEntity<Boolean> customerIsRegisteredToCampaign(@PathVariable long customerId, @PathVariable Long campaignId) {
         //TODO da migliorare con metodo repository
-        boolean isRegistered = customerRepository.getReferenceById(customerId).getCards().parallelStream()
-                .map(CustomerCard::getActivityCard)
-                .map(Card::getCampaign)
-                .map(Campaign::getId)
-                .anyMatch(id -> id.equals(campaignId));
+        boolean isRegistered = customerCardRepository.findByCustomer_Id(customerId)
+                .stream()
+                .anyMatch(customerCard -> customerCard.getCard().getCampaign()
+                        .equals(campaignRepository.findById(campaignId).orElseThrow()));
         return ResponseEntity.ok().body(isRegistered);
     }
 

@@ -95,7 +95,7 @@ public class AuthController {
     private record LoginRequest(String email, String password) {
     }
 
-    private record SignupRequest(String name, String surname, String email, String password, String telephoneNumber,
-                                 Set<String> roles) {
+    public record SignupRequest(String name, String surname, String email, String password, String telephoneNumber,
+                                Set<String> roles) {
     }
 }

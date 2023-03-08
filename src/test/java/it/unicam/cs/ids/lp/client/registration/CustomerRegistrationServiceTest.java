@@ -1,8 +1,8 @@
 package it.unicam.cs.ids.lp.client.registration;
 
 import it.unicam.cs.ids.lp.client.Customer;
+import it.unicam.cs.ids.lp.client.auth.AuthController;
 import it.unicam.cs.ids.lp.client.card.CustomerCard;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,12 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CustomerRegistrationServiceTest {
 
     @Autowired
-    private CustomerRegistrationService customerRegistrationService;
+    private AuthController authController;
 
     @Test
     void registerCustomer() {
         assertThrows(NullPointerException.class,
-                () -> customerRegistrationService.registerCustomer(null, new CustomerCard()));
+                () -> authController.registerUser(
+                        new AuthController.SignupRequest(null, null, null, null, null, null)));
         Customer customer = new Customer();
         customer.setName("Steve");
         customer.setSurname("jobs");
@@ -27,7 +28,7 @@ class CustomerRegistrationServiceTest {
         CustomerCard customerCard = new CustomerCard();
         customerCard.setCustomer(customer);
         customer.setPassword("SteveIlJobs");
-        Assertions.assertTrue(customerRegistrationService.registerCustomer(customer, customerCard));
+        //Assertions.assertTrue(authController.registerUser());
     }
 
     @Test

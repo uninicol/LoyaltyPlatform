@@ -13,15 +13,5 @@ public interface CustomerCardRepository
         JpaSpecificationExecutor<CustomerCard> {
     List<CustomerCard> findByCustomer_Id(long id);
 
-
-//    @Transactional
-//    @Modifying
-//    @Query("update Card c set c.activities = ?1")
-//    Specification<CustomerCard> getCustomerCards(String customerName) {
-//        return (root, query, criteriaBuilder) -> {
-//            Join<CustomerCard, Customer> customerCards = root.join("cards");
-//            return criteriaBuilder.equal(customerCards.get("customer").get("name"), customerName);
-//        };
-//    }
 }
 

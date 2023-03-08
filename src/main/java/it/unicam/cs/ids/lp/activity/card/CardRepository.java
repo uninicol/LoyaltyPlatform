@@ -14,4 +14,6 @@ public interface CardRepository extends JpaRepository<Card, Long> {
     @Modifying
     @Query("update Card c set c.activities = ?1")
     long updateActivitiesBy(@NonNull List<Activity> activities);
+
+
 }
