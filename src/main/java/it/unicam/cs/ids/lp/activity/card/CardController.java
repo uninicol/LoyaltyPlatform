@@ -17,15 +17,13 @@ public class CardController {
     private ActivityRepository activityRepository;
     @Autowired
     private CardRepository cardRepository;
+    @Autowired
+    private CardMapper cardMapper;
 
     @PutMapping("/createCard/{activityId}")
     public ResponseEntity<?> createCard(@PathVariable Long activityId, @RequestBody CardRequest cardRequest) {
         Activity activity = activityRepository.getReferenceById(activityId);
-        Card card = new Card();
-        card.setProgram(cardRequest.program);
-        card.setRules(cardRequest.rules);
-        card.setActivities(List.of(activity));
-        activity.setCard(card);
+        Card card = cardMapper.apply(cardRequest, activity);
         cardRepository.save(card);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -37,8 +35,5 @@ public class CardController {
         list.add(activityRepository.findById(activityId).orElseThrow());
         cardRepository.updateActivitiesBy(list);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    record CardRequest(List<Rule<?>> rules, Card.CardProgram program) {
     }
 }

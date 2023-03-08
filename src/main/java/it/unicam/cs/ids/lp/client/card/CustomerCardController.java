@@ -21,16 +21,17 @@ public class CustomerCardController {
     private CustomerRepository customerRepository;
 
     @PutMapping("/add/{customerId}/{cardId}")
-    public ResponseEntity<?> addCustomerCard(@PathVariable Long customerId, @PathVariable Long cardId) {
+    public ResponseEntity<String> addCustomerCard(@PathVariable Long customerId, @PathVariable Long cardId) {
         CustomerCard customerCard = new CustomerCard();
         customerCard.setCard(cardRepository.findById(cardId).orElseThrow());
         customerCard.setCustomer(customerRepository.findById(customerId).orElseThrow());
         customerCardRepository.save(customerCard);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok()
+                .body("Carta aggiunta con successo");
     }
 
     @GetMapping("/{customerId}/getCards")
-    public ResponseEntity<?> getCustomerCards(@PathVariable long customerId) {
+    public ResponseEntity<List<CustomerCard>> getCustomerCards(@PathVariable long customerId) {
         // TODO fare test
         List<CustomerCard> customerCards = customerCardRepository.findByCustomer_Id(customerId);
         return new ResponseEntity<>(customerCards, HttpStatus.OK);
