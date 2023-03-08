@@ -34,21 +34,32 @@ public class JwtUtils {
 
     public ResponseCookie generateJwtCookie(CustomerDetailsImpl customer) {
         String jwt = generateTokenFromEmail(customer.getEmail());
-        return ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(jwtExpirationMs)
-                .httpOnly(true).build();
+        return ResponseCookie.from(jwtCookie, jwt)
+                .path("/api")
+                .maxAge(jwtExpirationMs)
+                .httpOnly(true)
+                .build();
     }
 
     public ResponseCookie getCleanJwtCookie() {
-        return ResponseCookie.from(jwtCookie, null).path("/api").build();
+        return ResponseCookie.from(jwtCookie, null)
+                .path("/api")
+                .build();
     }
 
     public String getEmailFromJwtToken(String token) {
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().
+                setSigningKey(jwtSecret)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 
     public boolean validateJwtToken(String authToken) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+            Jwts.parser()
+                    .setSigningKey(jwtSecret)
+                    .parseClaimsJws(authToken);
             return true;
         } catch (MalformedJwtException e) {
             logger.error("Invalid JWT token: {}", e.getMessage());

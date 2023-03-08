@@ -32,8 +32,10 @@ public class CustomerController {
     }
 
     @PostMapping("/{customerId}/registerTo/{campaignId}")
-    public ResponseEntity<?> registerCustomerToCampaign(@PathVariable Long customerId, @PathVariable Long campaignId) {
+    public ResponseEntity<String> registerCustomerToCampaign(@PathVariable Long customerId, @PathVariable Long campaignId) {
         Campaign campaign = campaignRepository.getReferenceById(campaignId);
-        return customerCardController.addCustomerCard(customerId, campaign.getActivityCard().getId());
+        customerCardController.addCustomerCard(customerId, campaign.getActivityCard().getId());
+        return ResponseEntity.ok()
+                .body("Utente registrato alla campagna con successo");
     }
 }

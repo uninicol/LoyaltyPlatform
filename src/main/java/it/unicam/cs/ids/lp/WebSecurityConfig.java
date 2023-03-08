@@ -21,7 +21,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
@@ -68,7 +67,6 @@ public class WebSecurityConfig {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests().requestMatchers("/**").permitAll()// TODO sistemare pattern
-                //.requestMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
         http.headers().xssProtection();
         http.authenticationProvider(authenticationProvider());

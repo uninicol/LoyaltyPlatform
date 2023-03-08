@@ -2,6 +2,7 @@ package it.unicam.cs.ids.lp.client.registration;
 
 import it.unicam.cs.ids.lp.client.Customer;
 import it.unicam.cs.ids.lp.client.auth.AuthController;
+import it.unicam.cs.ids.lp.client.auth.CustomerSignupRequest;
 import it.unicam.cs.ids.lp.client.card.CustomerCard;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ class CustomerRegistrationServiceTest {
     void registerCustomer() {
         assertThrows(NullPointerException.class,
                 () -> authController.registerUser(
-                        new AuthController.SignupRequest(null, null, null, null, null, null)));
+                        new CustomerSignupRequest(null, null, null, null, null, null)));
         Customer customer = new Customer();
         customer.setName("Steve");
         customer.setSurname("jobs");
