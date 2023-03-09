@@ -7,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/activityCard")
 public class CardController {
@@ -22,7 +20,7 @@ public class CardController {
 
     @PutMapping("/createCard/{activityId}")
     public ResponseEntity<?> createCard(@PathVariable Long activityId, @RequestBody CardRequest cardRequest) {
-        Activity activity = activityRepository.getReferenceById(activityId);
+        Activity activity = activityRepository.findById(activityId).orElseThrow();
         Card card = cardMapper.apply(cardRequest, activity);
         cardRepository.save(card);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -30,10 +28,9 @@ public class CardController {
 
     @PostMapping("/{cardId}/addActivity/{activityId}")
     public ResponseEntity<?> addActivity(@PathVariable long activityId, @PathVariable Long cardId) {
-        List<Activity> list = cardRepository.findById(cardId).orElseThrow()
-                .getActivities();
-        list.add(activityRepository.findById(activityId).orElseThrow());
-        cardRepository.updateActivitiesBy(list);
+        cardRepository.getReferenceById(cardId)
+                .getActivities()
+                .add(activityRepository.findById(activityId).orElseThrow());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

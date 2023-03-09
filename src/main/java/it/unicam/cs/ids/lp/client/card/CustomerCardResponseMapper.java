@@ -17,19 +17,14 @@ public class CustomerCardResponseMapper implements Function<CustomerCard, Custom
     @Override
     public CustomerCardResponse apply(CustomerCard customerCard) {
         return new CustomerCardResponse(
-                customerCard.getCustomerCardIds().getId(),
-                cardRepository.findById(
-                                customerCard.getCustomerCardIds()
-                                        .getCard()
-                                        .getId())
-                        .orElseThrow()
-                        .getName(),
+                customerCard.getId(),
+                cardRepository.findById(customerCard.getCard()
+                                .getId())
+                        .orElseThrow().getName(),
                 customerCard.getPoints(),
                 customerCard.getTier(),
-                campaignResponseMapper.apply(
-                        customerCard.getCustomerCardIds()
-                                .getCard()
-                                .getCampaign())
+                campaignResponseMapper.apply(customerCard.getCard()
+                        .getCampaign())
         );
     }
 }

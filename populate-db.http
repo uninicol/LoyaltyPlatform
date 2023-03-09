@@ -18,7 +18,7 @@ Content-Type: application/json
 {
   "name": "Amazon card",
   "rules": null,
-  "program": "Membership"
+  "program": "MEMBERSHIP"
 }
 
 <> 2023-03-02T195653.500.json
@@ -56,7 +56,7 @@ Content-Type: application/json
 {
   "name": "Udemy card",
   "rules": null,
-  "program": "Membership"
+  "program": "MEMBERSHIP"
 }
 
 <> 2023-03-02T195653.500.json
@@ -94,7 +94,7 @@ Content-Type: application/json
 {
   "name": "Starbucks card",
   "rules": null,
-  "program": "Membership"
+  "program": "MEMBERSHIP"
 }
 
 <> 2023-03-02T195653.500.json
@@ -132,7 +132,7 @@ Content-Type: application/json
 {
   "name": "Sephora card",
   "rules": null,
-  "program": "Membership"
+  "program": "MEMBERSHIP"
 }
 
 <> 2023-03-02T195653.500.json
@@ -170,7 +170,7 @@ Content-Type: application/json
 {
   "name": "Zara card",
   "rules": null,
-  "program": "Membership"
+  "program": "MEMBERSHIP"
 }
 
 <> 2023-03-02T195653.500.json
@@ -208,7 +208,7 @@ Content-Type: application/json
 {
   "name": "Adidas card",
   "rules": null,
-  "program": "Membership"
+  "program": "MEMBERSHIP"
 }
 
 <> 2023-03-02T195653.500.json
@@ -246,7 +246,7 @@ Content-Type: application/json
 {
   "name": "SoulCycle card",
   "rules": null,
-  "program": "Membership"
+  "program": "MEMBERSHIP"
 }
 
 <> 2023-03-02T195653.500.json
@@ -284,7 +284,7 @@ Content-Type: application/json
 {
   "name": "Lyft card",
   "rules": null,
-  "program": "Membership"
+  "program": "MEMBERSHIP"
 }
 
 <> 2023-03-02T195653.500.json

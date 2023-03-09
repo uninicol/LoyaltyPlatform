@@ -24,7 +24,6 @@ public class CustomerController {
 
     @PostMapping("/isRegisteredTo/{campaignId}")
     public ResponseEntity<Boolean> customerIsRegisteredToCampaign(HttpServletRequest request, @PathVariable Long campaignId) {
-        //TODO da migliorare con metodo repository
         Customer customer = jwtUtils.getCustomerFromRequest(request);
         boolean isRegistered = customer.getCustomerCard()
                 .stream()
@@ -37,7 +36,7 @@ public class CustomerController {
 
     @PostMapping("/registerToCampaign/{campaignId}")
     public ResponseEntity<String> registerCustomerToCampaign(HttpServletRequest request, @PathVariable Long campaignId) {
-        Campaign campaign = campaignRepository.getReferenceById(campaignId);
+        Campaign campaign = campaignRepository.findById(campaignId).orElseThrow();
         customerCardController.addCustomerCard(request, campaign.getActivityCard().getId());
         return ResponseEntity.ok()
                 .body("Utente registrato alla campagna con successo");

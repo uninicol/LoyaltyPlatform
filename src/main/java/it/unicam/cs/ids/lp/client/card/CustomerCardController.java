@@ -1,6 +1,7 @@
 package it.unicam.cs.ids.lp.client.card;
 
 import it.unicam.cs.ids.lp.JWT_auth.JwtUtils;
+import it.unicam.cs.ids.lp.client.Customer;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,10 +34,8 @@ public class CustomerCardController {
 
     @GetMapping("/getCards")
     public ResponseEntity<List<CustomerCardResponse>> getCustomerCards(HttpServletRequest request) {
-        // TODO fare test
-        String email = jwtUtils.getEmailFromRequest(request);
-
-        List<CustomerCardResponse> customerCards = customerCardRepository.findByCustomerCardIds_Customer_Email(email)
+        Customer customer = jwtUtils.getCustomerFromRequest(request);
+        List<CustomerCardResponse> customerCards = customer.getCustomerCard()
                 .stream()
                 .map(customerCardResponseMapper)
                 .toList();

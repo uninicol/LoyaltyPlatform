@@ -33,7 +33,7 @@ public class Card {
     private CardProgram program;
 
     @ManyToOne
-    @JoinColumn(name = "campaign_id")
+    @JoinColumn
     private Campaign campaign;
 
     @Override

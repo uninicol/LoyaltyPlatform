@@ -22,7 +22,8 @@ public class Campaign {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @ManyToOne
-    @JoinColumn(name = "card_id")
+    @JoinColumn
+    @ToString.Exclude
     private Card activityCard;
     private String description;
     private String shortDescription;

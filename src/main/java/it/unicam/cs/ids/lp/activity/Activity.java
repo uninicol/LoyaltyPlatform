@@ -32,7 +32,7 @@ public class Activity {
     @Enumerated(EnumType.STRING)
     private ContentCategory category;
     @ManyToOne
-    @JoinColumn(name = "card_id")
+    @JoinColumn
     private Card card;
 
     @Override

@@ -2,7 +2,6 @@ package it.unicam.cs.ids.lp.client.auth;
 
 
 import it.unicam.cs.ids.lp.JWT_auth.JwtUtils;
-import it.unicam.cs.ids.lp.JWT_auth.Role;
 import it.unicam.cs.ids.lp.client.Customer;
 import it.unicam.cs.ids.lp.client.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 @RestController
 @RequestMapping("client/auth")
 public class AuthController {
@@ -33,8 +28,6 @@ public class AuthController {
     private JwtUtils jwtUtils;
     @Autowired
     private CustomerMapper customerMapper;
-    @Autowired
-    private RoleMapper roleMapper;
 
     @PostMapping("/signin")
     public ResponseEntity<CustomerInfoResponse> authenticateUser(@RequestBody CustomerLoginRequest loginRequest) {
@@ -56,21 +49,8 @@ public class AuthController {
                     .body(null);
 
         Customer customer = customerMapper.apply(signUpRequest);
-        Set<Role> roles = getRoles(signUpRequest);
-        customer.setRoles(roles);
         customerRepository.save(customer);
         return authenticateUser(new CustomerLoginRequest(signUpRequest.email(), signUpRequest.password()));
-    }
-
-    private Set<Role> getRoles(CustomerSignupRequest signUpRequest) {
-        Set<Role> roles = new HashSet<>();
-        if (signUpRequest.roles() == null || signUpRequest.roles().isEmpty())
-            roles.add(roleMapper.apply("user"));
-        else
-            roles = signUpRequest.roles().stream()
-                    .map(roleMapper)
-                    .collect(Collectors.toSet());
-        return roles;
     }
 
     @PostMapping("/signout")

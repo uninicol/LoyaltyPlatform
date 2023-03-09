@@ -17,10 +17,8 @@ public class CustomerCardMapper implements BiFunction<String, Long, CustomerCard
     @Override
     public CustomerCard apply(String email, Long cardId) {
         CustomerCard customerCard = new CustomerCard();
-        CustomerCardIds customerCardIds = new CustomerCardIds();
-        customerCardIds.setCustomer(customerRepository.findByEmail(email).orElseThrow());
-        customerCardIds.setCard(cardRepository.findById(cardId).orElseThrow());
-        customerCard.setCustomerCardIds(customerCardIds);
+        customerCard.setCustomer(customerRepository.findByEmail(email).orElseThrow());
+        customerCard.setCard(cardRepository.findById(cardId).orElseThrow());
         return customerCard;
     }
 }
