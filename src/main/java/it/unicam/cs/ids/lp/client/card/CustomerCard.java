@@ -1,8 +1,7 @@
 package it.unicam.cs.ids.lp.client.card;
 
-import it.unicam.cs.ids.lp.activity.card.Card;
-import it.unicam.cs.ids.lp.client.Customer;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -17,15 +16,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class CustomerCard {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private Long id;
-    @ManyToOne
-    @JoinColumn
-    private Customer customer;
-    @ManyToOne
-    @JoinColumn
-    private Card card;
+    private CustomerCardIds customerCardIds;
     private Integer points = 0;
     private Integer tier = 1;
     private Boolean family = false;
@@ -35,12 +26,11 @@ public class CustomerCard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerCard that = (CustomerCard) o;
-        return id.equals(that.id);
+        return customerCardIds.equals(that.customerCardIds);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(customerCardIds);
     }
 }
-

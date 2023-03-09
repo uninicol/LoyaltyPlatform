@@ -21,3 +21,21 @@ Content-Type: application/json
   "email": "gianni.dicostanzo@gmail.com",
   "password": "SonoGianni007"
 }
+
+###
+POST http://localhost:8080/api/client/isRegisteredTo/1
+#false
+
+###
+POST http://localhost:8080/api/client/registerToCampaign/1
+
+###
+POST http://localhost:8080/api/client/isRegisteredTo/1
+#true
+
+###
+POST http://localhost:8080/api/client/registerToCampaign/1
+
+###
+GET http://localhost:8080/api/customerCard/getCards
+#1 card

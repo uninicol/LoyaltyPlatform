@@ -28,7 +28,7 @@ public class Customer {
     @JsonIgnore
     private String password;
     private LocalDate registrationDate;
-    @OneToMany(mappedBy = "id", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<CustomerCard> cards;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)

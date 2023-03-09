@@ -11,6 +11,7 @@ import java.util.List;
 public interface CustomerCardRepository
         extends JpaRepository<CustomerCard, Customer>,
         JpaSpecificationExecutor<CustomerCard> {
-    List<CustomerCard> findByCustomer_Email(String email);
+    List<CustomerCard> findByCustomerCardIds_Customer_Email(String email);
+
 }
 

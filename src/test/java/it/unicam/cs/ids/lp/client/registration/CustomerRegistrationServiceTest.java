@@ -3,7 +3,6 @@ package it.unicam.cs.ids.lp.client.registration;
 import it.unicam.cs.ids.lp.client.Customer;
 import it.unicam.cs.ids.lp.client.auth.AuthController;
 import it.unicam.cs.ids.lp.client.auth.CustomerSignupRequest;
-import it.unicam.cs.ids.lp.client.card.CustomerCard;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +14,8 @@ class CustomerRegistrationServiceTest {
 
     @Autowired
     private AuthController authController;
+    //@Autowired
+    //private CustomerCardMapper customerCardMapper;
 
     @Test
     void registerCustomer() {
@@ -26,9 +27,8 @@ class CustomerRegistrationServiceTest {
         customer.setSurname("jobs");
         customer.setEmail("StivJobs@gmail.com");
         customer.setTelephoneNumber("132-456-7890");
-        CustomerCard customerCard = new CustomerCard();
-        customerCard.setCustomer(customer);
         customer.setPassword("SteveIlJobs");
+        //CustomerCard customerCard = customerCardMapper.apply(customer.getEmail(), )
         //Assertions.assertTrue(authController.registerUser());
     }
 

@@ -29,10 +29,11 @@ public class CustomerController {
     public ResponseEntity<Boolean> customerIsRegisteredToCampaign(HttpServletRequest request, @PathVariable Long campaignId) {
         //TODO da migliorare con metodo repository
         String email = jwtUtils.getEmailFromRequest(request);
-        boolean isRegistered = customerCardRepository.findByCustomer_Email(email)
+        Campaign campaign = campaignRepository.findById(campaignId).orElseThrow();
+        boolean isRegistered = customerCardRepository.findByCustomerCardIds_Customer_Email(email)
                 .stream()
-                .anyMatch(customerCard -> customerCard.getCard().getCampaign()
-                        .equals(campaignRepository.findById(campaignId).orElseThrow()));
+                .anyMatch(customerCard -> customerCard.getCustomerCardIds().getCard().getCampaign()
+                        .equals(campaign));
         return ResponseEntity.ok().body(isRegistered);
     }
 

@@ -1,8 +1,6 @@
 package it.unicam.cs.ids.lp.client.card;
 
 import it.unicam.cs.ids.lp.JWT_auth.JwtUtils;
-import it.unicam.cs.ids.lp.activity.card.CardRepository;
-import it.unicam.cs.ids.lp.client.CustomerRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,20 +16,16 @@ public class CustomerCardController {
     @Autowired
     private CustomerCardRepository customerCardRepository;
     @Autowired
-    private CardRepository cardRepository;
-    @Autowired
-    private CustomerRepository customerRepository;
-    @Autowired
     private JwtUtils jwtUtils;
     @Autowired
     private CustomerCardResponseMapper customerCardResponseMapper;
+    @Autowired
+    private CustomerCardMapper customerCardMapper;
 
     @PutMapping("/addCard/{cardId}")
     public ResponseEntity<String> addCustomerCard(HttpServletRequest request, @PathVariable Long cardId) {
         String email = jwtUtils.getEmailFromRequest(request);
-        CustomerCard customerCard = new CustomerCard();
-        customerCard.setCard(cardRepository.findById(cardId).orElseThrow());
-        customerCard.setCustomer(customerRepository.findByEmail(email).orElseThrow());
+        CustomerCard customerCard = customerCardMapper.apply(email, cardId);
         customerCardRepository.save(customerCard);
         return ResponseEntity.ok()
                 .body("Carta aggiunta con successo");
@@ -42,7 +36,7 @@ public class CustomerCardController {
         // TODO fare test
         String email = jwtUtils.getEmailFromRequest(request);
 
-        List<CustomerCardResponse> customerCards = customerCardRepository.findByCustomer_Email(email)
+        List<CustomerCardResponse> customerCards = customerCardRepository.findByCustomerCardIds_Customer_Email(email)
                 .stream()
                 .map(customerCardResponseMapper)
                 .toList();
