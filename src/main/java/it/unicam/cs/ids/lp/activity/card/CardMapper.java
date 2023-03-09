@@ -11,6 +11,7 @@ public class CardMapper implements BiFunction<CardRequest, Activity, Card> {
     @Override
     public Card apply(CardRequest cardRequest, Activity activity) {
         Card card = new Card();
+        card.setName(cardRequest.name());
         card.setProgram(cardRequest.program());
         card.setRules(cardRequest.rules());
         card.setActivities(List.of(activity));

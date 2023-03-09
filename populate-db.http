@@ -16,6 +16,7 @@ PUT http://localhost:8080/api/activityCard/createCard/1
 Content-Type: application/json
 
 {
+  "name": "Amazon card",
   "rules": null,
   "program": "Membership"
 }
@@ -53,6 +54,7 @@ PUT http://localhost:8080/api/activityCard/createCard/2
 Content-Type: application/json
 
 {
+  "name": "Udemy card",
   "rules": null,
   "program": "Membership"
 }
@@ -90,6 +92,7 @@ PUT http://localhost:8080/api/activityCard/createCard/3
 Content-Type: application/json
 
 {
+  "name": "Starbucks card",
   "rules": null,
   "program": "Membership"
 }
@@ -127,6 +130,7 @@ PUT http://localhost:8080/api/activityCard/createCard/4
 Content-Type: application/json
 
 {
+  "name": "Sephora card",
   "rules": null,
   "program": "Membership"
 }
@@ -164,6 +168,7 @@ PUT http://localhost:8080/api/activityCard/createCard/5
 Content-Type: application/json
 
 {
+  "name": "Zara card",
   "rules": null,
   "program": "Membership"
 }
@@ -201,6 +206,7 @@ PUT http://localhost:8080/api/activityCard/createCard/6
 Content-Type: application/json
 
 {
+  "name": "Adidas card",
   "rules": null,
   "program": "Membership"
 }
@@ -238,6 +244,7 @@ PUT http://localhost:8080/api/activityCard/createCard/7
 Content-Type: application/json
 
 {
+  "name": "SoulCycle card",
   "rules": null,
   "program": "Membership"
 }
@@ -275,6 +282,7 @@ PUT http://localhost:8080/api/activityCard/createCard/8
 Content-Type: application/json
 
 {
+  "name": "Lyft card",
   "rules": null,
   "program": "Membership"
 }

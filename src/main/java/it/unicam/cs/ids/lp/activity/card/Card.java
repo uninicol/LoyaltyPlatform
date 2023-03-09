@@ -22,6 +22,7 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private Long id;
+    String name;
     @Transient
     private List<Rule<?>> rules;
     @OneToMany(mappedBy = "card", orphanRemoval = true, cascade = CascadeType.PERSIST)
@@ -48,11 +49,4 @@ public class Card {
         return getClass().hashCode();
     }
 
-    public enum CardProgram {
-        Points,
-        Levels,
-        Membership,
-        Cashback,
-        Coalition,
-    }
 }

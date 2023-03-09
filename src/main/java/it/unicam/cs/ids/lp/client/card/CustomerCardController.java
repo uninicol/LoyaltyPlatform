@@ -23,6 +23,8 @@ public class CustomerCardController {
     private CustomerRepository customerRepository;
     @Autowired
     private JwtUtils jwtUtils;
+    @Autowired
+    private CustomerCardResponseMapper customerCardResponseMapper;
 
     @PutMapping("/addCard/{cardId}")
     public ResponseEntity<String> addCustomerCard(HttpServletRequest request, @PathVariable Long cardId) {
@@ -36,10 +38,14 @@ public class CustomerCardController {
     }
 
     @GetMapping("/getCards")
-    public ResponseEntity<List<CustomerCard>> getCustomerCards(HttpServletRequest request) {
+    public ResponseEntity<List<CustomerCardResponse>> getCustomerCards(HttpServletRequest request) {
         // TODO fare test
         String email = jwtUtils.getEmailFromRequest(request);
-        List<CustomerCard> customerCards = customerCardRepository.findByCustomer_Email(email);
+
+        List<CustomerCardResponse> customerCards = customerCardRepository.findByCustomer_Email(email)
+                .stream()
+                .map(customerCardResponseMapper)
+                .toList();
         return new ResponseEntity<>(customerCards, HttpStatus.OK);
     }
 }

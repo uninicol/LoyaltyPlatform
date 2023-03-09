@@ -46,7 +46,6 @@ public class JwtUtils {
                 .path("/api")
                 .build();
     }
-
     public String getEmailFromJwtToken(String token) {
         return Jwts.parser().
                 setSigningKey(jwtSecret)
