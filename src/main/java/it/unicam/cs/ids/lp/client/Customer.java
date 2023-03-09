@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -28,8 +29,9 @@ public class Customer {
     @JsonIgnore
     private String password;
     private LocalDate registrationDate;
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<CustomerCard> cards;
+    @OneToMany(mappedBy = "customer", orphanRemoval = true)
+    @ToString.Exclude
+    private Set<CustomerCard> customerCard;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
@@ -39,12 +41,12 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return id == customer.id && name.equals(customer.name) && surname.equals(customer.surname) && telephoneNumber.equals(customer.telephoneNumber) && email.equals(customer.email) && password.equals(customer.password) && registrationDate.equals(customer.registrationDate) && cards.equals(customer.cards);
+        return id == customer.id;
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(id);
     }
 }
 

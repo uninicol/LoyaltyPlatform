@@ -4,7 +4,6 @@ import it.unicam.cs.ids.lp.JWT_auth.JwtUtils;
 import it.unicam.cs.ids.lp.activity.campaign.Campaign;
 import it.unicam.cs.ids.lp.activity.campaign.CampaignRepository;
 import it.unicam.cs.ids.lp.client.card.CustomerCardController;
-import it.unicam.cs.ids.lp.client.card.CustomerCardRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,20 +20,19 @@ public class CustomerController {
     @Autowired
     private CustomerCardController customerCardController;
     @Autowired
-    private CustomerCardRepository customerCardRepository;
-    @Autowired
     private JwtUtils jwtUtils;
 
     @PostMapping("/isRegisteredTo/{campaignId}")
     public ResponseEntity<Boolean> customerIsRegisteredToCampaign(HttpServletRequest request, @PathVariable Long campaignId) {
         //TODO da migliorare con metodo repository
-        String email = jwtUtils.getEmailFromRequest(request);
-        Campaign campaign = campaignRepository.findById(campaignId).orElseThrow();
-        boolean isRegistered = customerCardRepository.findByCustomerCardIds_Customer_Email(email)
+        Customer customer = jwtUtils.getCustomerFromRequest(request);
+        boolean isRegistered = customer.getCustomerCard()
                 .stream()
-                .anyMatch(customerCard -> customerCard.getCustomerCardIds().getCard().getCampaign()
-                        .equals(campaign));
-        return ResponseEntity.ok().body(isRegistered);
+                .anyMatch(customerCard -> customerCard.getCard()
+                        .getCampaign()
+                        .getId() == campaignId);
+        return ResponseEntity.ok()
+                .body(isRegistered);
     }
 
     @PostMapping("/registerToCampaign/{campaignId}")
