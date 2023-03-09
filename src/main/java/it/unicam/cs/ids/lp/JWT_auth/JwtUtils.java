@@ -2,6 +2,8 @@ package it.unicam.cs.ids.lp.JWT_auth;
 
 
 import io.jsonwebtoken.*;
+import it.unicam.cs.ids.lp.client.Customer;
+import it.unicam.cs.ids.lp.client.CustomerRepository;
 import it.unicam.cs.ids.lp.client.auth.CustomerDetailsImpl;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +28,11 @@ public class JwtUtils {
 
     @Value("${loyaltyplatform.app.jwtCookieName}")
     private String jwtCookie;
+    private final CustomerRepository customerRepository;
+
+    public JwtUtils(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     public String getJwtFromCookies(HttpServletRequest request) {
         Cookie cookie = WebUtils.getCookie(request, jwtCookie);
@@ -56,6 +63,10 @@ public class JwtUtils {
 
     public String getEmailFromRequest(HttpServletRequest request) {
         return getEmailFromJwtToken(getJwtFromCookies(request));
+    }
+
+    public Customer getCustomerFromRequest(HttpServletRequest request) {
+        return customerRepository.findByEmail(getEmailFromRequest(request)).orElseThrow();
     }
 
     public boolean validateJwtToken(String authToken) {
