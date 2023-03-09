@@ -50,16 +50,16 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> registerUser(@RequestBody CustomerSignupRequest signUpRequest) {
+    public ResponseEntity<CustomerInfoResponse> registerUser(@RequestBody CustomerSignupRequest signUpRequest) {
         if (customerRepository.existsByEmail(signUpRequest.email()))
             return ResponseEntity.badRequest()
-                    .body("Error: Email is already in use!");
+                    .body(null);
 
         Customer customer = customerMapper.apply(signUpRequest);
         Set<Role> roles = getRoles(signUpRequest);
         customer.setRoles(roles);
         customerRepository.save(customer);
-        return ResponseEntity.ok("User registered successfully!");
+        return authenticateUser(new CustomerLoginRequest(signUpRequest.email(), signUpRequest.password()));
     }
 
     private Set<Role> getRoles(CustomerSignupRequest signUpRequest) {
