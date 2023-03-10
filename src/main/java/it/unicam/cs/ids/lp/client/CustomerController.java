@@ -7,10 +7,7 @@ import it.unicam.cs.ids.lp.client.card.CustomerCardController;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/client")
@@ -22,7 +19,7 @@ public class CustomerController {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @PostMapping("/isRegisteredTo/{campaignId}")
+    @GetMapping("/isRegisteredTo/{campaignId}")
     public ResponseEntity<Boolean> customerIsRegisteredToCampaign(HttpServletRequest request, @PathVariable Long campaignId) {
         Customer customer = jwtUtils.getCustomerFromRequest(request);
         boolean isRegistered = customer.getCustomerCard()
@@ -39,6 +36,6 @@ public class CustomerController {
         Campaign campaign = campaignRepository.findById(campaignId).orElseThrow();
         customerCardController.addCustomerCard(request, campaign.getActivityCard().getId());
         return ResponseEntity.ok()
-                .body("Utente registrato alla campagna con successo");
+                .body("Utente registrato alla campagna " + campaign.getActivityCard().getName() + " con successo");
     }
 }
