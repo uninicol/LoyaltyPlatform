@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/activity")
 public class ActivityRegistrationController {
     @Autowired
     private ActivityRegistrationService activityRegistrationService;

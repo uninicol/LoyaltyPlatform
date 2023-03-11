@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/activityCard")
+@RequestMapping("/activity/activityCard")
 public class CardController {
 
     @Autowired
