@@ -66,7 +66,7 @@ public class WebSecurityConfig {
         http.csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeHttpRequests().requestMatchers("/**").permitAll()// TODO sistemare pattern
+                .authorizeHttpRequests().requestMatchers("/activity/**", "/client/auth/**").permitAll()
                 .anyRequest().authenticated();
         http.headers().xssProtection();
         http.authenticationProvider(authenticationProvider());
